@@ -69,12 +69,12 @@ Coef *criaCoef(real a, real b, real c, real d, int n, int m) {
 
 void printCoef(Coef *coef) {
 	int I, N, n, m;
-	a = coef->a;
-	b = coef->b;
-	c = coef->c;
-	d = coef->d;
-	e = coef->e;
-	f = coef->f;
+	real *a = coef->a;
+	real *b = coef->b;
+	real *c = coef->c;
+	real *d = coef->d;
+	real *e = coef->e;
+	real *f = coef->f;
 	
 	n = coef->n;
 	m = coef->m;
