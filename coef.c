@@ -104,6 +104,11 @@ void printCoef(Coef *coef) {
 	
 	for(I = 0; I < N; I++)
 		printf("%lf ", e[I]);
+		
+	printf("\nf -> ");
+	
+	for(I = 0; I < N; I++)
+		printf("%lf ", f[I]);
 }
 
 real *A(Coef *coef) {
