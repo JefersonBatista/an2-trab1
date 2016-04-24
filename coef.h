@@ -3,19 +3,22 @@
 
 // Definição das macros
 #define k 1
-#define betaX(x, y) (1)
-#define betaY(x, y) (20*y)
-#define gamma(x, y) (1)
-#define f(x, y) (x + y)
+#define betaX(x, y) (0)
+#define betaY(x, y) (0)
+#define gamma(x, y) (100)
+#define f(x, y) (7000)
 
-typedef float real;
+typedef double real;
 typedef struct coef Coef;
 
 Coef *criaCoef(real a, real b, real c, real d, int n, int m);
+void printCoef(Coef *coef);
 real *A(Coef *coef);
 real *B(Coef *coef);
 real *C(Coef *coef);
 real *D(Coef *coef);
 real *E(Coef *coef);
 real *F(Coef *coef);
+int divX(Coef *coef);
+int divY(Coef *coef);
 

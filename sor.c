@@ -1,11 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "coef.h"
+#include "sor.h"
 
-real *sor(Coef *coef, real w, int iterMax, int tol, int n, int m) {
-	int iter, i, N = n*m;
-	iter = 0;
+real *sor(Coef *coef, real omega, int iterMax, int tol) {
+	int n, m, N, I, iter;
+	n = divX(coef);
+	m = divY(coef);
+	N = n*m;
 	
 	real *u = (real*) calloc(N, sizeof(real));
 	real r, soma, erro, erroMax, temp;
@@ -18,29 +17,34 @@ real *sor(Coef *coef, real w, int iterMax, int tol, int n, int m) {
 	e = E(coef);
 	f = F(coef);
 	
-	for(i = 0; i < N; i++)
-		u[i] = f[i]/a[i];
+	for(I = 0; I < N; I++)
+		u[I] = f[I]/a[I];
 	
+	iter = 0;
 	while(iter < iterMax) {
 		erroMax = 0.0;
 		
-		for(i = 0; i < N; i++) {
-			r = 1/a[i];
+		for(I = 0; I < N; I++) {
+			r = 1/a[I];
 			
 			soma = 0;
-			soma += f[i];
-			soma -= e[i]*u[i-n];
-			soma -= c[i]*u[i-1];
-			soma -= b[i]*u[i+1];
-			soma -= d[i]*u[i+n];
+			soma += f[I];
+			if(e[I] != 0.0)
+				soma -= e[I]*u[I-n];
+			if(c[I] != 0.0)
+				soma -= c[I]*u[I-1];
+			if(b[I] != 0.0)
+				soma -= b[I]*u[I+1];
+			if(d[I] != 0.0)
+			soma -= d[I]*u[I+n];
 			
-			temp = r*w*soma + (1-w)*u[i];
-			erro = abs(u[i] - temp);
+			temp = r*omega*soma + (1-omega)*u[I];
+			erro = abs(u[I] - temp);
 			
 			if(erro > erroMax)
 				erroMax = erro;
 				
-			u[i] = temp;
+			u[I] = temp;
 		}
 		
 		if(erroMax < tol)

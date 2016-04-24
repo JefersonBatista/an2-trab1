@@ -1,12 +1,8 @@
 #include "coef.h"
 
 struct coef {
-	real *a;
-	real *b;
-	real *c;
-	real *d;
-	real *e;
-	real *f;
+	real *a, *b, *c, *d, *e, *f;
+	int n, m;
 };
 
 // Calculando os coeficientes
@@ -26,24 +22,88 @@ Coef *criaCoef(real a, real b, real c, real d, int n, int m) {
 	novo->e = (real*) calloc(N, sizeof(real));
 	novo->f = (real*) calloc(N, sizeof(real));
 	
+	novo->n = n;
+	novo->m = m;
+	
 	real x, y;
 	int I, i, j;
 	for(I = 0; I < N; I++) {
-		i = ((I-1) % n) + 1;
+		i = (I % n) + 1;
 		j = I/n + 1;
 		
 		x = a + (i - 1)*hx;
 		y = c + (j - 1)*hy;
 	
-		novo->a[i] = gamma(x, y) + 2*ihx + 2*ihy;
-		novo->b[i] = -ihx*ihx + betaX(x, y)*0.5*ihx;
-		novo->c[i] = -ihx*ihx - betaX(x, y)*0.5*ihx;
-		novo->d[i] = -ihy*ihy + betaY(x, y)*0.5*ihy;
-		novo->e[i] = -ihy*ihy - betaY(x, y)*0.5*ihy;
-		novo->f[i] = f(x, y);
+		novo->a[I] = gamma(x, y) + 2*ihx + 2*ihy;
+		
+		// Vizinho da direita
+		if(i == n)
+			novo->b[I] = 0.0;
+		else
+			novo->b[I] = -ihx*ihx + betaX(x, y)*0.5*ihx;
+		
+		// Vizinho da esquerda
+		if(i == 1)
+			novo->c[I] = 0.0;
+		else
+			novo->c[I] = -ihx*ihx - betaX(x, y)*0.5*ihx;
+		
+		// Vizinho de cima
+		if(j == m)
+			novo->d[I] = 0.0;
+		else
+			novo->d[I] = -ihy*ihy + betaY(x, y)*0.5*ihy;
+		
+		// Vizinho de baixo
+		if(j == 1)
+			novo->e[I] = 0.0;
+		else
+			novo->e[I] = -ihy*ihy - betaY(x, y)*0.5*ihy;
+		
+		// Vetor independente
+		novo->f[I] = f(x, y);
 	}
 	
 	return novo;
+}
+
+void printCoef(Coef *coef) {
+	int I, N, n, m;
+	a = coef->a;
+	b = coef->b;
+	c = coef->c;
+	d = coef->d;
+	e = coef->e;
+	f = coef->f;
+	
+	n = coef->n;
+	m = coef->m;
+	N = n*m;
+	
+	printf("\na -> ");
+	
+	for(I = 0; I < N; I++)
+		printf("%lf ", a[I]);
+		
+	printf("\nb -> ");
+	
+	for(I = 0; I < N; I++)
+		printf("%lf ", b[I]);
+	
+	printf("\nc -> ");
+	
+	for(I = 0; I < N; I++)
+		printf("%lf ", c[I]);
+		
+	printf("\nd -> ");
+	
+	for(I = 0; I < N; I++)
+		printf("%lf ", d[I]);
+		
+	printf("\ne -> ");
+	
+	for(I = 0; I < N; I++)
+		printf("%lf ", e[I]);
 }
 
 real *A(Coef *coef) {
@@ -68,5 +128,13 @@ real *E(Coef *coef) {
 
 real *F(Coef *coef) {
 	return coef->f;
+}
+
+int divX(Coef *coef) {
+	return coef->n;
+}
+
+int divY(Coef *coef) {
+	return coef->m;
 }
 
