@@ -1,6 +1,6 @@
 #include "sor.h"
 
-real *sor(Coef *coef, real omega, int iterMax, int tol) {
+real *sor(Coef *coef, real omega, int iterMax, real tol) {
 	int n, m, N, I, iter;
 	n = divX(coef);
 	m = divY(coef);
@@ -25,10 +25,9 @@ real *sor(Coef *coef, real omega, int iterMax, int tol) {
 		erroMax = 0.0;
 		
 		for(I = 0; I < N; I++) {
-			r = 1/a[I];
+			r = 1.0/a[I];
 			
-			soma = 0;
-			soma += f[I];
+			soma = f[I];
 			if(e[I] != 0.0)
 				soma -= e[I]*u[I-n];
 			if(c[I] != 0.0)
@@ -36,9 +35,9 @@ real *sor(Coef *coef, real omega, int iterMax, int tol) {
 			if(b[I] != 0.0)
 				soma -= b[I]*u[I+1];
 			if(d[I] != 0.0)
-			soma -= d[I]*u[I+n];
+				soma -= d[I]*u[I+n];
 			
-			temp = r*omega*soma + (1-omega)*u[I];
+			temp = r*omega*soma + (1.0-omega)*u[I];
 			erro = abs(u[I] - temp);
 			
 			if(erro > erroMax)
@@ -47,11 +46,16 @@ real *sor(Coef *coef, real omega, int iterMax, int tol) {
 			u[I] = temp;
 		}
 		
+		printf("erroMax = %lf\n", erroMax);
+		
 		if(erroMax < tol)
 			break;
 		
 		iter++;
 	}
+	
+	printf("iter = %d\n\n", iter);
+	
 	return u;
 }
 

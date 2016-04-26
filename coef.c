@@ -10,8 +10,8 @@ Coef *criaCoef(real a, real b, real c, real d, int n, int m) {
 	int N = n*m;
 	real hx = (b - a)/(n - 1);
 	real hy = (d - c)/(m - 1);
-	real ihx = 1/hx;
-	real ihy = 1/hy;
+	real invHx = 1/hx;
+	real invHy = 1/hy;
 
 	// Alocando espaço para os coeficientes
 	Coef *novo = (Coef*) malloc(sizeof(Coef));
@@ -34,31 +34,31 @@ Coef *criaCoef(real a, real b, real c, real d, int n, int m) {
 		x = a + (i - 1)*hx;
 		y = c + (j - 1)*hy;
 	
-		novo->a[I] = gamma(x, y) + 2*ihx + 2*ihy;
+		novo->a[I] = gamma(x, y) + 2*invHx*invHx + 2*invHy*invHy;
 		
 		// Vizinho da direita
 		if(i == n)
 			novo->b[I] = 0.0;
 		else
-			novo->b[I] = -ihx*ihx + betaX(x, y)*0.5*ihx;
+			novo->b[I] = -invHx*invHx + betaX(x, y)*0.5*invHx;
 		
 		// Vizinho da esquerda
 		if(i == 1)
 			novo->c[I] = 0.0;
 		else
-			novo->c[I] = -ihx*ihx - betaX(x, y)*0.5*ihx;
+			novo->c[I] = -invHx*invHx - betaX(x, y)*0.5*invHx;
 		
 		// Vizinho de cima
 		if(j == m)
 			novo->d[I] = 0.0;
 		else
-			novo->d[I] = -ihy*ihy + betaY(x, y)*0.5*ihy;
+			novo->d[I] = -invHy*invHy + betaY(x, y)*0.5*invHy;
 		
 		// Vizinho de baixo
 		if(j == 1)
 			novo->e[I] = 0.0;
 		else
-			novo->e[I] = -ihy*ihy - betaY(x, y)*0.5*ihy;
+			novo->e[I] = -invHy*invHy - betaY(x, y)*0.5*invHy;
 		
 		// Vetor independente
 		novo->f[I] = f(x, y);
@@ -85,30 +85,32 @@ void printCoef(Coef *coef) {
 	for(I = 0; I < N; I++)
 		printf("%lf ", a[I]);
 		
-	printf("\nb -> ");
+	printf("\n\nb -> ");
 	
 	for(I = 0; I < N; I++)
 		printf("%lf ", b[I]);
 	
-	printf("\nc -> ");
+	printf("\n\nc -> ");
 	
 	for(I = 0; I < N; I++)
 		printf("%lf ", c[I]);
 		
-	printf("\nd -> ");
+	printf("\n\nd -> ");
 	
 	for(I = 0; I < N; I++)
 		printf("%lf ", d[I]);
 		
-	printf("\ne -> ");
+	printf("\n\ne -> ");
 	
 	for(I = 0; I < N; I++)
 		printf("%lf ", e[I]);
 		
-	printf("\nf -> ");
+	printf("\n\nf -> ");
 	
 	for(I = 0; I < N; I++)
 		printf("%lf ", f[I]);
+		
+	printf("\n\n");
 }
 
 real *A(Coef *coef) {
