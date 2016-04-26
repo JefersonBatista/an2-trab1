@@ -3,5 +3,5 @@
 #include <math.h>
 #include "coef.h"
 
-real *sor(Coef *coef, real w, int iterMax, int tol, int n, int m);
+real *sor(Coef *coef, real omega, int iterMax, real tol);
 
