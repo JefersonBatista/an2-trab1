@@ -59,3 +59,56 @@ real *sor(Coef *coef, real omega, int iterMax, real tol) {
 	return u;
 }
 
+real *sorLivre(real a, real b, real c, real d, int n, int m, real omega, int iterMax, real tol) {
+	int N = n*m;
+	real hx = (b - a)/(n - 1);
+	real hy = (d - c)/(m - 1);
+	real invHx = 1/hx;
+	real invHy = 1/hy;
+	
+	real x, y;
+	int I, i, j;
+	
+	// Daqui pra baixo tem que consertar
+	for(I = 0; I < N; I++)
+		u[I] = f[I]/a[I];
+	
+	iter = 0;
+	while(iter < iterMax) {
+		erroMax = 0.0;
+		
+		for(I = 0; I < N; I++) {
+			r = 1.0/a[I];
+			
+			soma = f[I];
+			if(e[I] != 0.0)
+				soma -= e[I]*u[I-n];
+			if(c[I] != 0.0)
+				soma -= c[I]*u[I-1];
+			if(b[I] != 0.0)
+				soma -= b[I]*u[I+1];
+			if(d[I] != 0.0)
+				soma -= d[I]*u[I+n];
+			
+			temp = r*omega*soma + (1.0-omega)*u[I];
+			erro = abs(u[I] - temp);
+			
+			if(erro > erroMax)
+				erroMax = erro;
+				
+			u[I] = temp;
+		}
+		
+		printf("erroMax = %lf\n", erroMax);
+		
+		/* if(erroMax < tol)
+			break; */
+		
+		iter++;
+	}
+	
+	printf("iter = %d\n\n", iter);
+	
+	return u;
+}
+

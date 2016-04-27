@@ -100,6 +100,10 @@ void derivadaContorno(Coef *coef, real cst, real H, real hx, real hy, int lado) 
 	
 		case LEFT:
 			i = 1;
+			
+			e[0] = 0.0; // canto de baixo
+			d[n*(m-1)] = 0.0 // canto de cima
+			
 			for(j = 1; j <= m; j++) {
 				I = i + n*(j - 1) - 1;
 		
@@ -111,6 +115,10 @@ void derivadaContorno(Coef *coef, real cst, real H, real hx, real hy, int lado) 
 	
 		case RIGHT:
 			i = n;
+			
+			e[n-1] = 0.0; // canto de baixo
+			d[n*m - 1] = 0.0; //canto de cima
+			
 			for(j = 1; j <= m; j++) {
 				I = i + n*(j - 1) - 1;
 		

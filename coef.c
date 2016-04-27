@@ -35,29 +35,9 @@ Coef *criaCoef(real a, real b, real c, real d, int n, int m) {
 		y = c + (j - 1)*hy;
 	
 		novo->a[I] = gamma(x, y) + 2*invHx*invHx + 2*invHy*invHy;
-		
-		// Vizinho da direita
-		/* if(i == n)
-			novo->b[I] = 0.0;
-		else */
 		novo->b[I] = -invHx*invHx + betaX(x, y)*0.5*invHx;
-		
-		// Vizinho da esquerda
-		/* if(i == 1)
-			novo->c[I] = 0.0;
-		else */
 		novo->c[I] = -invHx*invHx - betaX(x, y)*0.5*invHx;
-		
-		// Vizinho de cima
-		/* if(j == m)
-			novo->d[I] = 0.0;
-		else */
 		novo->d[I] = -invHy*invHy + betaY(x, y)*0.5*invHy;
-		
-		// Vizinho de baixo
-		/* if(j == 1)
-			novo->e[I] = 0.0;
-		else */
 		novo->e[I] = -invHy*invHy - betaY(x, y)*0.5*invHy;
 		
 		// Vetor independente

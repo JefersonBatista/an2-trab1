@@ -1,6 +1,9 @@
 #include "sor.h"
 #include "contorno.h"
 
+// Agora todo o contorno deve ser tratado para rodar o programa
+// Ainda tenho que consertar o critério de parada por tol
+
 int main() {
 	int n, m, N;
 	real a, b, c, d;
