@@ -37,28 +37,28 @@ Coef *criaCoef(real a, real b, real c, real d, int n, int m) {
 		novo->a[I] = gamma(x, y) + 2*invHx*invHx + 2*invHy*invHy;
 		
 		// Vizinho da direita
-		if(i == n)
+		/* if(i == n)
 			novo->b[I] = 0.0;
-		else
-			novo->b[I] = -invHx*invHx + betaX(x, y)*0.5*invHx;
+		else */
+		novo->b[I] = -invHx*invHx + betaX(x, y)*0.5*invHx;
 		
 		// Vizinho da esquerda
-		if(i == 1)
+		/* if(i == 1)
 			novo->c[I] = 0.0;
-		else
-			novo->c[I] = -invHx*invHx - betaX(x, y)*0.5*invHx;
+		else */
+		novo->c[I] = -invHx*invHx - betaX(x, y)*0.5*invHx;
 		
 		// Vizinho de cima
-		if(j == m)
+		/* if(j == m)
 			novo->d[I] = 0.0;
-		else
-			novo->d[I] = -invHy*invHy + betaY(x, y)*0.5*invHy;
+		else */
+		novo->d[I] = -invHy*invHy + betaY(x, y)*0.5*invHy;
 		
 		// Vizinho de baixo
-		if(j == 1)
+		/* if(j == 1)
 			novo->e[I] = 0.0;
-		else
-			novo->e[I] = -invHy*invHy - betaY(x, y)*0.5*invHy;
+		else */
+		novo->e[I] = -invHy*invHy - betaY(x, y)*0.5*invHy;
 		
 		// Vetor independente
 		novo->f[I] = f(x, y);
@@ -144,4 +144,8 @@ int divX(Coef *coef) {
 int divY(Coef *coef) {
 	return coef->m;
 }
+
+/* real f(real x, real y) {
+	real monstro = -((5.0/2) * (pow(e,pow(x,4.5))) *  (81 * (pow(x,9)) - 81 * (pow(x,8)) + 135 * (pow(x,4.5)) - 99 * (pow(x,3.5)) + 8) * (y-1) * y + (20 * (pow(e,pow(x,4.5))) * (x -1) * x) ) + 5 * (pow(e,pow(x,4.5))) * ( x * ( 9 *( x-1) * (pow(x,3.5))+4)-2)*(y-1)*y + 20*y*(10*(pow(e,pow(x,4.5)))*(x-1)*x*(2*y-1))+ 10 * x*y*(1-x)*(1-y)*(pow(e,pow(x,4.5)))
+} */
 

@@ -1,5 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "coef.h"
 
-// TODO
-// void trataContorno()
+#define DOWN 0
+#define LEFT 1
+#define RIGHT 2
+#define UP 3
+
+void valorPrescrito(Coef *coef, real valor, int lado);
+void derivadaContorno(Coef *coef, real c, real h, int lado);
+
+

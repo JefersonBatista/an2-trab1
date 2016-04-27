@@ -48,8 +48,8 @@ real *sor(Coef *coef, real omega, int iterMax, real tol) {
 		
 		printf("erroMax = %lf\n", erroMax);
 		
-		if(erroMax < tol)
-			break;
+		/* if(erroMax < tol)
+			break; */
 		
 		iter++;
 	}

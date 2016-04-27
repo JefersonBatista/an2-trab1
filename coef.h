@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 // Definição das macros
 #define k 1
 #define betaX(x, y) (0)
 #define betaY(x, y) (0)
-#define gamma(x, y) (100)
-#define f(x, y) (7000)
+#define gamma(x, y) (0)
+#define f(x, y) (0)
+#define e 2.781828
 
 typedef double real;
 typedef struct coef Coef;
@@ -21,4 +23,6 @@ real *E(Coef *coef);
 real *F(Coef *coef);
 int divX(Coef *coef);
 int divY(Coef *coef);
+
+real monstro(real x, real y);
 

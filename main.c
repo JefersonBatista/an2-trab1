@@ -1,15 +1,39 @@
 #include "sor.h"
+#include "contorno.h"
 
 int main() {
-	Coef *coef = criaCoef(0.0, 1.0, 0.0, 1.0, 4, 4);
+	int n, m, N;
+	real a, b, c, d;
+	
+	real omega, tol;
+	int iterMax;
+	real valor;
+	
+	scanf("%d", &n);
+	scanf("%d", &m);
+	
+	scanf("%lf", &a);
+	scanf("%lf", &b);
+	scanf("%lf", &c);
+	scanf("%lf", &d);
+	
+	scanf("%lf", &omega);
+	scanf("%d", &iterMax);
+	scanf("%lf", &tol);
+	scanf("%lf", &valor);
+	
+	N = n*m;
+	
+	Coef *coef = criaCoef(a, b, c, d, n, m);
+	valorPrescrito(coef, valor);
 	printCoef(coef);
-	real *x = sor(coef, 1.0, 100, 0.1);
+	real *x = sor(coef, omega, iterMax, tol);
 	
 	printf("Solução do sistema linear: \n");
-	int i;
+	int I;
 	
-	for(i = 0; i < 16; i++)
-		printf("%lf\n", x[i]);
+	for(I = 0; I < N; I++)
+		printf("%lf\n", x[I]);
 	
 	return 0;
 }
