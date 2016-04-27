@@ -74,7 +74,7 @@ void valorPrescrito(Coef *coef, real valor, int lado) {
 	}
 }
 
-void derivadaContorno(Coef *coef, real c, real h, real hx, real hy, int lado) {
+void derivadaContorno(Coef *coef, real cst, real H, real hx, real hy, int lado) {
 	int n = divX(coef);
 	int m = divY(coef);
 	int i, j, I;
@@ -92,8 +92,8 @@ void derivadaContorno(Coef *coef, real c, real h, real hx, real hy, int lado) {
 			for(i = 2; i < n; i++) {
 				I = i + n*(j - 1) - 1;
 		
-				a[I] += e[I]*(1-hy*c/k);
-				f[I] -= e[I]*(hy*c*h/k);
+				a[I] += e[I]*(1-hy*cst/k);
+				f[I] -= e[I]*(hy*cst*H/k);
 				e[I] = 0.0;
 			}
 			break;
@@ -103,8 +103,8 @@ void derivadaContorno(Coef *coef, real c, real h, real hx, real hy, int lado) {
 			for(j = 1; j <= m; j++) {
 				I = i + n*(j - 1) - 1;
 		
-				a[I] += c[I]*(1-hx*c/k);
-				f[I] -= c[I]*(hx*c*h/k);
+				a[I] += c[I]*(1-hx*cst/k);
+				f[I] -= c[I]*(hx*cst*H/k);
 				c[I] = 0.0;		
 			}
 			break;
@@ -114,8 +114,8 @@ void derivadaContorno(Coef *coef, real c, real h, real hx, real hy, int lado) {
 			for(j = 1; j <= m; j++) {
 				I = i + n*(j - 1) - 1;
 		
-				a[I] += b[I]*(1-hx*c/k);
-				f[I] -= b[I]*(hx*c*h/k);
+				a[I] += b[I]*(1-hx*cst/k);
+				f[I] -= b[I]*(hx*cst*H/k);
 				b[I] = 0.0;		
 			}
 			break;
@@ -125,8 +125,8 @@ void derivadaContorno(Coef *coef, real c, real h, real hx, real hy, int lado) {
 			for(i = 2; i < n; i++) {
 				I = i + n*(j - 1) - 1;
 		
-				a[I] += d[I]*(1-hy*c/k);
-				f[I] -= d[I]*(hy*c*h/k);
+				a[I] += d[I]*(1-hy*cst/k);
+				f[I] -= d[I]*(hy*cst*H/k);
 				d[I] = 0.0;		
 			}
 			break;

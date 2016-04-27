@@ -8,6 +8,6 @@
 #define UP 3
 
 void valorPrescrito(Coef *coef, real valor, int lado);
-void derivadaContorno(Coef *coef, real c, real h, int lado);
+void derivadaContorno(Coef *coef, real c, real h, real hx, real hy, int lado);
 
 

@@ -25,7 +25,10 @@ int main() {
 	N = n*m;
 	
 	Coef *coef = criaCoef(a, b, c, d, n, m);
-	valorPrescrito(coef, valor);
+	valorPrescrito(coef, valor, DOWN);
+	valorPrescrito(coef, valor, LEFT);
+	valorPrescrito(coef, valor, RIGHT);
+	valorPrescrito(coef, valor, UP);
 	printCoef(coef);
 	real *x = sor(coef, omega, iterMax, tol);
 	
