@@ -27,19 +27,23 @@ int main() {
 	
 	N = n*m;
 	
-	Coef *coef = criaCoef(a, b, c, d, n, m);
+	/* Coef *coef = criaCoef(a, b, c, d, n, m);
 	valorPrescrito(coef, valor, DOWN);
 	valorPrescrito(coef, valor, LEFT);
 	valorPrescrito(coef, valor, RIGHT);
-	valorPrescrito(coef, valor, UP);
-	printCoef(coef);
-	real *x = sor(coef, omega, iterMax, tol);
+	valorPrescrito(coef, valor, UP); */
+	// printCoef(coef);
+	// real *x = sor(coef, omega, iterMax, tol);
+	real *x = sorLivre(a, b, c, d, n, m, omega, iterMax, tol, valor);
 	
 	printf("Solução do sistema linear: \n");
 	int I;
 	
 	for(I = 0; I < N; I++)
 		printf("%lf\n", x[I]);
+		
+	// liberaCoef(coef);
+	free(x);
 	
 	return 0;
 }

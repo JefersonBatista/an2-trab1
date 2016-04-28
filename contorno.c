@@ -74,6 +74,7 @@ void valorPrescrito(Coef *coef, real valor, int lado) {
 	}
 }
 
+// Lembrar de inserir o k aqui
 void derivadaContorno(Coef *coef, real cst, real H, real hx, real hy, int lado) {
 	int n = divX(coef);
 	int m = divY(coef);
@@ -102,14 +103,14 @@ void derivadaContorno(Coef *coef, real cst, real H, real hx, real hy, int lado) 
 			i = 1;
 			
 			e[0] = 0.0; // canto de baixo
-			d[n*(m-1)] = 0.0 // canto de cima
+			d[n*(m-1)] = 0.0; // canto de cima
 			
 			for(j = 1; j <= m; j++) {
 				I = i + n*(j - 1) - 1;
 		
 				a[I] += c[I]*(1-hx*cst/k);
 				f[I] -= c[I]*(hx*cst*H/k);
-				c[I] = 0.0;		
+				c[I] = 0.0;
 			}
 			break;
 	

@@ -12,7 +12,7 @@ contorno: contorno.c
 	gcc -Wall -c contorno.c
 	
 main: main.c coef.o sor.o contorno.o
-	gcc -Wall -o main main.c coef.o sor.o contorno.o
+	gcc -Wall -o main main.c coef.o sor.o contorno.o -lm
 	
 clean:
 	rm *.o main
