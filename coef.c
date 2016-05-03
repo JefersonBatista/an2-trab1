@@ -135,8 +135,21 @@ void liberaCoef(Coef *coef) {
 	free(coef);
 }
 
+real f(real x, real y) {
+	return 0.0;
+}
+
 /* real f(real x, real y) {
-	real monstro = -((5.0/2) * (pow(euler,pow(x,4.5))) *  (81 * (pow(x,9)) - 81 * (pow(x,8)) + 135 * (pow(x,4.5)) - 99 * (pow(x,3.5)) + 8) 		* (y-1) * y + (20 * (pow(euler,pow(x,4.5))) * (x-1) * x)) + 5 * (pow(euler,pow(x,4.5))) * (x * (9*(x-1) * (pow(x,3.5))+4)-2)(y-1)*y	+ 		20*y*(10*(pow(euler,pow(x,4.5)))*(x-1)*x*(2*y-1))+ 10 * x*y*(1-x)*(1-y)*(pow(euler,pow(x,4.5)));
+	real result = -(5.0/2) * (pow(euler,pow(x,4.5))) * (81*(pow(x,9)) - 81*(pow(x,8)) + 135*(pow(x,4.5)) - 99*(pow(x,3.5)) + 8)*(y-1)*y;
+	result += 20 * (pow(euler,pow(x,4.5))) * (x-1) * x;
+	result += 5 * (pow(euler,pow(x,4.5))) * (x * (9*(x-1) * (pow(x,3.5))+4)-2)*(y-1)*y;
+	result += 20 * y * (10*(pow(euler,pow(x,4.5)))*(x-1)*x*(2*y-1));
+	result += 10 * x*y*(1-x)*(1-y)*(pow(euler,pow(x,4.5)));
+	return result;
 } */
+
+real val(real x, real y) {
+	return 10*x*y*(1 - x)*(1 - y)*pow(euler, pow(x, 4.5));
+}
 
 

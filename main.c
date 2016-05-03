@@ -1,9 +1,6 @@
 #include "sor.h"
 #include "contorno.h"
 
-// Agora todo o contorno deve ser tratado para rodar o programa
-// Ainda tenho que consertar o critério de parada por tol
-
 int main() {
 	int n, m, N;
 	real a, b, c, d;
@@ -27,14 +24,15 @@ int main() {
 	
 	N = n*m;
 	
-	/* Coef *coef = criaCoef(a, b, c, d, n, m);
+	Coef *coef = criaCoef(a, b, c, d, n, m);
 	valorPrescrito(coef, valor, DOWN);
 	valorPrescrito(coef, valor, LEFT);
 	valorPrescrito(coef, valor, RIGHT);
-	valorPrescrito(coef, valor, UP); */
+	valorPrescrito(coef, valor, UP);
 	// printCoef(coef);
-	// real *x = sor(coef, omega, iterMax, tol);
-	real *x = sorLivre(a, b, c, d, n, m, omega, iterMax, tol, valor);
+	real *x = sor(coef, omega, iterMax, tol);
+	// real *val = validacao(a, b, c, d, n, m);
+	// real *x = sorLivre(a, b, c, d, n, m, omega, iterMax, tol, valor);
 	
 	printf("Solução do sistema linear: \n");
 	int I;
@@ -42,8 +40,9 @@ int main() {
 	for(I = 0; I < N; I++)
 		printf("%lf\n", x[I]);
 		
-	// liberaCoef(coef);
+	liberaCoef(coef);
 	free(x);
+	// free(val);
 	
 	return 0;
 }

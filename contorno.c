@@ -74,7 +74,6 @@ void valorPrescrito(Coef *coef, real valor, int lado) {
 	}
 }
 
-// Lembrar de inserir o k aqui
 void derivadaContorno(Coef *coef, real cst, real H, real hx, real hy, int lado) {
 	int n = divX(coef);
 	int m = divY(coef);

@@ -128,3 +128,27 @@ real *sorLivre(real a, real b, real c, real d, int n, int m, real omega, int ite
 	return u;
 }
 
+real *validacao(real a, real b, real c, real d, int n, int m) {
+	int N = n*m;
+	real hx = (b - a)/(n - 1);
+	real hy = (d - c)/(m - 1);
+	
+	int I, i, j;
+	
+	real *u = (real*) calloc(N, sizeof(real));
+	real x, y;
+	
+	for(I = 0; I < N; I++) {
+		i = (I % n) + 1;
+		j = I/n + 1;
+		
+		x = a + (i - 1)*hx;
+		y = c + (j - 1)*hy;
+		
+		u[I] = val(x, y);
+	}
+	
+	return u;
+}
+
+

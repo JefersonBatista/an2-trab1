@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define euler 2.718281828
+
 // Definição das macros
 #define k 1
 #define betaX(x, y) (0)
 #define betaY(x, y) (0)
 #define gamma(x, y) (0)
-#define f(x, y) (0)
-#define euler 2.781828
 
 typedef double real;
 typedef struct coef Coef;
@@ -26,5 +26,7 @@ int divY(Coef *coef);
 
 void liberaCoef(Coef *coef);
 
-// real monstro(real x, real y);
+real f(real x, real y);
+real val(real x, real y);
+
 

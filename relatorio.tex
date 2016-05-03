@@ -1,0 +1,324 @@
+%% abtex2-modelo-artigo.tex, v-1.9.5 laurocesar
+%% Copyright 2012-2015 by abnTeX2 group at http://www.abntex.net.br/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://www.abntex.net.br/
+%%
+%% This work consists of the files abntex2-modelo-artigo.tex and
+%% abntex2-modelo-references.bib
+%%
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Artigo Acadêmico em conformidade com
+% ABNT NBR 6022:2003: Informação e documentação - Artigo em publicação 
+% periódica científica impressa - Apresentação
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	article,			% indica que é um artigo acadêmico
+	11pt,				% tamanho da fonte
+	oneside,			% para impressão apenas no verso. Oposto a twoside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	sumario=tradicional
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{nomencl} 			% Lista de simbolos
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+		
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+% ---
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Método das Diferenças Finitas Aplicado a Problemas Bidimensionais}
+\autor{Jeferson de Oliveira Batista}
+\local{Vitória, Brasil}
+\data{2016}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={Método das Diferenças Finitas Aplicado a Problemas Bidimensionais},
+	    pdfcreator={Fernando},
+		pdfkeywords={valor de contorno}{bidimensionais}{solução}{problemas}{matriz esparsa}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ---
+% Altera as margens padrões
+% ---
+\setlrmarginsandblock{3cm}{3cm}{*}
+\setulmarginsandblock{3cm}{3cm}{*}
+\checkandfixthelayout
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% Espaçamento simples
+\SingleSpacing
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+%---
+%
+% Se desejar escrever o artigo em duas colunas, descomente a linha abaixo
+% e a linha com o texto ``FIM DE ARTIGO EM DUAS COLUNAS''.
+% \twocolumn[    		% INICIO DE ARTIGO EM DUAS COLUNAS
+%
+%---
+% página de titulo
+\maketitle
+
+% resumo em português
+
+
+% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\section*{Introdução}
+\addcontentsline{toc}{section}{Introdução}
+
+O estudo da equação de transporte, também denominada equação da advecção-difusão-reação, continua sendo um ativo campo
+de pesquisa, uma vez que essa equação é de fundamental importância nos problemas relacionados a aerodinâmica, meteorologia,
+oceanografia, hidrologia, engenharia química e de reservatórios. Por isso, vários métodos têm sido desenvolvidos e implementados
+para a solução dessa equação, que pode ser definida por:
+
+\begin{center}
+$ -k \left(\frac{\partial^2 u}{\partial x^2}+\frac{\partial^2 u}{\partial y^2}\right)
++ \beta_x(x, y) \frac{\partial u}{\partial x} + \beta_y(x, y) \frac{\partial u}{\partial y} + \gamma(x, y) u=f(x,y) $
+em $\Omega = (a,b) \times (c,d)$
+\end{center}
+
+A equação de transporte é uma equação diferencial parcial, para a qual nem sempre é fácil encontrar uma solução analítica,
+por isso, um método numérico pode ser útil ou essencial.
+
+O objetivo deste trabalho é analisar como a forma de armazenamento das estruturas resultantes da discretização
+da equação de transporte por diferenças finitas pode influenciar no tempo de processamento.
+
+Para isso, foi implementado, em linguagem C, um programa que solucione a equação de transporte com condições de
+contorno que serão descritas adiante. O programa aplica o algoritmo SOR em uma forma de armazenamento de matriz
+pentadiagonal que será descrita e também de um modo livre de matriz.
+
+Este relatório explanará nas futuras seções, através do referencial teórico utilizado, a implementação e os experimentos
+numéricos empregados a fim de obter o melhor resultado, especialmente no quesito performance, dos algoritmos.
+
+
+% ----------------------------------------------------------
+% Seção de explicações
+% ----------------------------------------------------------
+\section{Método das Diferenças Finitas}
+
+Esse método consiste em discretizar o domínio em que uma dada equação diferencial está sendo aplicada. Tal domínio é retangular e,
+na discretização, sua extensão pela abscissa é dividida em $ n-1 $ pedações iguais e, pela ordenada, em $ m-1 $ pedaços iguais, formando
+uma malha de dimensões $ n \times m $ pontos.
+
+Depois, o método prossegue definindo a forma de aproximação, substituindo as derivadas parciais da equação por diferenças finitas.
+Dessa forma, chega-se a um sistema linear onde a matriz dos coefientes é pentadiagonal. Aplica-se as condições de contorno ao sistema
+linear formado, sendo que, tais condições são valores prescritos ou derivadas no contorno do domínio.
+
+No presente trabalho, a forma de armazenamento da matriz pentadiagonal adotada foi o uso de cinco vetores, em que cada vetor representa
+uma diagonal. O sistema linear então é resolvido utilizando-se o método SOR, que também é usado aqui livre de matrizes.
+
+\section{Implementação}
+
+\subsection{Entrada de dados}
+
+A entrada de dados consiste de um arquivo contendo os intervalos do domínio, o número máximo de iteraçãos, a tolerância para o erro,
+o fator de relaxação, as dimensões da malha de discretização e o valor prescrito no contorno.
+
+\subsection{Armazenamento e compactação matricial}
+
+Como o algoritmo usado aqui para a resolução do sistema linear resultante da equação de transporte é o SOR (\textit{Succesive Over Relaxation}),
+onde a matriz dos coeficientes não é alterada e é pentadiagonal, o tipo abstrato de dados (TAD) desenvolvido para o armazenamento dessa matriz
+consiste de cinco vetores, em que cada vetor representa uma diagonal, e um outro vetor que representa os termos independentes. As dimensões $n$
+e $m$ da malha resultante da discretização também são armazenadas. Esse TAD pode ser encontrado nos arquivos \emph{coef.c} e \emph{coef.h}.
+No arquivo \emph{coef.h} também se encontram macros para o armazenamento das funções $\beta_x$, $\beta_y$ e $\gamma$.
+
+A função do TAD que dá origem ao sistema linear no programa é a \emph{criaCoef} que recebe como parâmetros os intervalos do domínio $ \Omega $.
+A estrutura armazenada na TAD é então passada para funções de tratamento de contorno e para a função que implementa o algoritmo SOR, para que o
+sistema linear representado seja resolvido.
+
+\subsection{Tratamento das Condições de Contorno}
+
+O tratamento das condições de contorno se dá no módulo do arquivo \emph{contorno.c} e de sua respectiva biblioteca \emph{contorno.h}.
+Este módulo apresenta duas funções para tratamento do contorno, uma que é baseada num valor prescrito e se chama \emph{valorPrescrito}, e outra
+que é baseada na derivada no contorno e se chama \emph{derivadaContorno}.
+
+\subsection{SOR}
+
+O módulo responsável pela solução do sistema linear através do método SOR encontra-se nos arquivos \emph{sor.c} e \emph{sor.h}.
+
+Neste módulo, encontra-se implementado o método SOR em duas versões. A versão que recebe um TAD \emph{coef} como entrada se chama
+\emph{sor} e a que é livre de matriz se chama \emph{sorLivre} e recebe como parâmetros as dimensões do domínio $\Omega$, as dimensões
+da malha de discretização $n$ e $m$ e um valor prescrito para tratamento do contorno. Ambas as versões recebem um parâmetro indicando
+a tolerância para o erro cometido pelo SOR, o número máximo de iteraçãos e o fator de relaxação.
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ---
+% Título e resumo em língua estrangeira
+% ---
+
+% \twocolumn[    		% INICIO DE ARTIGO EM DUAS COLUNAS
+
+% titulo em inglês
+
+% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
+% ---
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{abntex2-modelo-references}
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Há diversas soluções prontas para glossário em LaTeX. 
+% Consulte o manual do abnTeX2 para obter sugestões.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+
+% ---
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+\cftinserthook{toc}{AAA}
+% ---
+% Inicia os anexos
+% ---
+%\anexos
+
+
+\end{document}
